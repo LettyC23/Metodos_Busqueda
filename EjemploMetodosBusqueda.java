@@ -20,6 +20,81 @@ class MetodosBusqueda{
         }       
         
 	    }
+	
+	
+	
+	public int busquedaBinaria(int[] numeros, int elemento) {
+		int centro, primero, valorCentro, ultimo;
+		primero = 0;
+		ultimo=numeros.length-1;
+		while(primero <= ultimo) {
+			centro= (primero+ultimo)/2;
+			valorCentro = numeros[centro];
+			System.out.println("Comparando " + elemento + " con " + numeros[centro]); //opcional
+		
+			if(elemento == valorCentro) {
+				return centro;
+			}else if(elemento < valorCentro) {
+				ultimo = centro-1; 
+			}else {
+				primero = centro + 1;
+			}
+		
+			
+		}
+		
+		return -1;
+	}
+	
+}
+
+class hashCero{
+	String[] arreglo;
+	//constructor
+	int tamaño, contador;
+	public hashCero(int tam) {
+		tamaño = tam;
+		arreglo= new String [tam];
+		Arrays.fill(arreglo, "-1");
+	}
+	
+	
+	public void funcionalidadHash(String [] cadenaArreglo, String[] arreglo) {
+		int i;
+		
+		for(i=0; i<cadenaArreglo.length; i++) {
+			String elemento = cadenaArreglo[i];
+			int indiceArreglo = Integer.parseInt(elemento)%7;
+			System.out.println("El indice es: " + indiceArreglo + " para el elemento " + elemento);
+					//tratando las colisiones
+			
+			while(arreglo[indiceArreglo] != "-") {
+				indiceArreglo++;
+				System.out.println("Oocurrio una colision para el indice " + (indiceArreglo-9) + 
+						" cambiar el idice  " + indiceArreglo);
+				indiceArreglo %= tamaño;
+			}
+			arreglo[indiceArreglo] = elemento;
+		}
+	}
+	
+	public String buscarClave(String elemento) {
+		int indiceArreglo = Integer.parseInt(elemento)%7;
+		int contador = 0;
+		while(arreglo[indiceArreglo] != "-1") {
+			if(arreglo[indiceArreglo] == elemento) {
+				System.out.println(" El elemento " + elemento + " fue encontrado en la posicion " + indiceArreglo);
+				return arreglo[indiceArreglo];
+			}
+			indiceArreglo++;
+			indiceArreglo %= tamaño;
+contador++;
+	if(contador>7) {
+		break;
+	}
+		}
+		return null;
+	}
   }
   
   public class EjemplosMetodosBusqueda {
